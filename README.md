@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# TODO
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## P0
 
-## Available Scripts
+- [ ] 加減乘除
+- [ ] decimal.js
+- [ ] 零開頭數字處理
+- [ ] 小數點驗證
+- [ ] 字串彈跳處理
+- [ ] 負小數處理
+- [ ] 負整數處理
 
-In the project directory, you can run:
+## P1
 
-### `yarn start`
+- [ ] 每三位數一個逗號
+- [ ] big.js
+- [ ] 數字超過 16 位處理
+- [ ] 匯率 api `https://api.exchangerate-api.com/v4/latest/${currencyOne}` https://github.com/windate3411/exchange-rate-calculator/blob/master/script.js
+      https://www.exchangerate-api.com/docs/standard-requests
+- [ ] 匯率互換按鈕
+- [ ] 匯率 json
+- [ ] 選擇國家跳彈窗和搜尋功能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 要學習的技術
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- hook
 
-### `yarn test`
+- styled-component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- big.js
 
-### `yarn build`
+- decimal.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- textInput handle
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+參考
+https://github.com/benringia/exchangerate-calc
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+demo https://benringia.github.io/exchangerate-calc/
 
-### `yarn eject`
+https://github.com/lenariem/exchange_rate_calculator
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+demo https://lenariem.github.io/exchange_rate_calculator/
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+https://github.com/ahfarmer/calculator
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+demo https://ahfarmer.github.io/calculator/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+顏色配置以上面的設計來做
