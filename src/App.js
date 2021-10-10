@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import numeral from 'numeral';
 
 import { PrimaryButton, SecondaryButton } from './components/Button';
@@ -11,35 +11,41 @@ const others = ['AC', 'Swap', 'Currency'];
 
 function App() {
   const [currentNum, setCurrentNum] = useState('');
-  const [calculation, setCalculation] = useState([]);
+  const [accumulation, setAccumulation] = useState('');
+  const [operator, setOperator] = useState('');
 
   useEffect(() => {
-    if (calculation.length < 3) return;
-    console.log('from useEffect!!');
-    calculate();
-  }, [calculation]);
+    console.log('currentNum: ', currentNum);
+    console.log('accumulation: ', accumulation);
+    console.log('operator: ', operator);
+  }, [currentNum, accumulation, operator]);
 
-  // useEffect(() => {
-  //   console.log('calculation: ', calculation);
-  //   console.log('currentNum: ', currentNum);
-  // }, [calculation, currentNum]);
-
-  const onOperatorPress = (operator) => {
-    switch (operator) {
+  const onOperatorPress = (currentOperator) => {
+    switch (currentOperator) {
       case '-':
       case 'x':
       case '+':
       case '÷':
-        if (calculation.length < 3) {
-          setCalculation((prev) => [...prev, currentNum, operator]);
-          setCurrentNum('');
+        if (accumulation && currentNum && operator) {
+          calculate();
+          setOperator(currentOperator);
+          return;
         }
+        if (currentNum) {
+          setOperator(currentOperator);
+          !accumulation && setAccumulation(currentNum);
+          setCurrentNum('');
+          return;
+        }
+        setOperator(currentOperator);
         break;
       case '=':
-        if (calculation.length < 3) {
-          setCalculation((prev) => [...prev, currentNum]);
-          setCurrentNum('');
+        if (accumulation && currentNum && operator) {
+          calculate();
+          return;
         }
+        break;
+      default:
         break;
     }
   };
@@ -48,84 +54,72 @@ function App() {
     switch (other) {
       case 'AC':
         setCurrentNum('');
-        setCalculation([]);
+        setAccumulation('');
+        setOperator('');
         break;
       case 'Swap':
         //TODO
         break;
       case 'Currency':
-      //TODO
+        //TODO
+        break;
+      default:
+        break;
     }
+  };
+
+  const onNumPress = (num) => {
+    setCurrentNum((prev) => prev + num);
   };
 
   const calculate = () => {
-    const [num1, operator, num2] = calculation;
-    console.log('num1: ', num1);
-    console.log('num2: ', num2);
-    console.log('operator: ', operator);
     let total = '0';
     switch (operator) {
       case '-':
-        total = numeral(num1).subtract(num2)._value;
-        setCurrentNum(total);
-        setCalculation([]);
+        total = numeral(accumulation).subtract(currentNum)._value + '';
         break;
       case 'x':
-        total = numeral(num1).multiply(num2)._value;
-        setCurrentNum(total);
-        setCalculation([]);
+        total = numeral(accumulation).multiply(currentNum)._value + '';
         break;
       case '+':
-        total = numeral(num1).add(num2)._value;
-        setCurrentNum(total);
-        setCalculation([]);
+        total = numeral(accumulation).add(currentNum)._value + '';
         break;
       case '÷':
-        total = numeral(num1).divide(num2)._value;
-        setCurrentNum(total);
-        setCalculation([]);
+        total = numeral(accumulation).divide(currentNum)._value + '';
+        break;
+      default:
         break;
     }
+    setCurrentNum('');
+    setAccumulation(total);
+    setOperator('');
   };
+
+  const inputValue = useMemo(() => currentNum || accumulation, [currentNum, accumulation]);
 
   return (
     <div style={{ marginTop: 30 }}>
-      <h1 style={{ textAlign: 'center', height: 40 }}>{currentNum}</h1>
+      <h1 style={{ textAlign: 'center', height: 40 }}>{inputValue}</h1>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ flexBasis: 180, alignSelf: 'flex-end' }}>
+        <div style={{ flexBasis: 210, alignSelf: 'flex-end' }}>
           <div>
             {others.map((el) => (
-              <SecondaryButton
-                key={el}
-                onClick={() => {
-                  onOtherPress(el);
-                }}
-              >
+              <SecondaryButton key={el} value={el} onClick={onOtherPress}>
                 {el}
               </SecondaryButton>
             ))}
           </div>
           <div>
             {numbers.map((el) => (
-              <PrimaryButton
-                key={el}
-                onClick={() => {
-                  setCurrentNum((prev) => prev + el);
-                }}
-              >
+              <PrimaryButton key={el} value={el} onClick={onNumPress}>
                 {el}
               </PrimaryButton>
             ))}
           </div>
         </div>
-        <div style={{ flexBasis: 60 }}>
+        <div style={{ flexBasis: 70 }}>
           {operators.map((el) => (
-            <SecondaryButton
-              key={el}
-              onClick={() => {
-                onOperatorPress(el);
-              }}
-            >
+            <SecondaryButton key={el} value={el} onClick={onOperatorPress}>
               {el}
             </SecondaryButton>
           ))}
