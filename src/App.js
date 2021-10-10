@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import numeral from 'numeral';
 
-import { PrimaryButton, SecondaryButton } from './components/Button';
-
-const operators = ['÷', 'x', '-', '+', '='];
-
-const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '00', '.'];
-
-const others = ['AC', 'Swap', 'Currency'];
+import Keyboard from './components/Keyboard';
 
 function App() {
   const [currentNum, setCurrentNum] = useState('');
@@ -101,29 +95,11 @@ function App() {
     <div style={{ marginTop: 30 }}>
       <h1 style={{ textAlign: 'center', height: 40 }}>{inputValue}</h1>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ flexBasis: 210, alignSelf: 'flex-end' }}>
-          <div>
-            {others.map((el) => (
-              <SecondaryButton key={el} value={el} onClick={onOtherPress}>
-                {el}
-              </SecondaryButton>
-            ))}
-          </div>
-          <div>
-            {numbers.map((el) => (
-              <PrimaryButton key={el} value={el} onClick={onNumPress}>
-                {el}
-              </PrimaryButton>
-            ))}
-          </div>
-        </div>
-        <div style={{ flexBasis: 70 }}>
-          {operators.map((el) => (
-            <SecondaryButton key={el} value={el} onClick={onOperatorPress}>
-              {el}
-            </SecondaryButton>
-          ))}
-        </div>
+        <Keyboard
+          onOtherPress={onOtherPress}
+          onNumPress={onNumPress}
+          onOperatorPress={onOperatorPress}
+        />
       </div>
     </div>
   );
