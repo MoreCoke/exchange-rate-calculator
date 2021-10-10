@@ -1,10 +1,18 @@
 import React from 'react';
 import { StyledPrimaryButton, StyledSecondaryButton } from './style';
 
-export function PrimaryButton({ onClick, children }) {
-  return <StyledPrimaryButton onClick={onClick}>{children}</StyledPrimaryButton>;
+export function PrimaryButton({ onClick, value, children }) {
+  return (
+    <StyledPrimaryButton value={value} onClick={() => onClick(value)}>
+      {children}
+    </StyledPrimaryButton>
+  );
 }
 
-export function SecondaryButton({ onClick, children }) {
-  return <StyledSecondaryButton onClick={onClick}>{children}</StyledSecondaryButton>;
+export function SecondaryButton({ onClick, value, children }) {
+  return (
+    <StyledSecondaryButton value={value} onClick={() => onClick(value)}>
+      {children}
+    </StyledSecondaryButton>
+  );
 }
