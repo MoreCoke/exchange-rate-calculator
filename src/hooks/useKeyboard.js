@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import numeral from 'numeral';
 
+const numberRegex = /[0-9]/;
+const isNumber = (s) => {
+  return numberRegex.test(s);
+};
+
 export default function useKeyboard() {
   const [currentNum, setCurrentNum] = useState('');
   const [accumulation, setAccumulation] = useState('');
@@ -61,7 +66,34 @@ export default function useKeyboard() {
   };
 
   const onNumPress = (num) => {
-    setCurrentNum((prev) => prev + num);
+    const hasPoint = currentNum.includes('.');
+    const integer = currentNum.split('.').shift();
+
+    // handle number start with zero
+    if (num === '0' || num === '00') {
+      if (integer === '' || (integer === '0' && !hasPoint)) {
+        setCurrentNum('0');
+        return;
+      }
+    }
+
+    if (num === '.') {
+      if (hasPoint) return;
+      if (integer === '') {
+        setCurrentNum('0.');
+        return;
+      }
+      setCurrentNum((prev) => prev + num);
+      return;
+    }
+
+    if (isNumber(num)) {
+      if (integer === '0' && !hasPoint) {
+        setCurrentNum(num);
+        return;
+      }
+      setCurrentNum((prev) => prev + num);
+    }
   };
 
   const calculate = () => {
