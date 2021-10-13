@@ -10,12 +10,13 @@ export default function useKeyboard() {
   const [currentNum, setCurrentNum] = useState('');
   const [accumulation, setAccumulation] = useState('');
   const [operator, setOperator] = useState('');
+  const [currentKey, setCurrentKey] = useState('');
 
-  useEffect(() => {
-    console.log('currentNum: ', currentNum);
-    console.log('accumulation: ', accumulation);
-    console.log('operator: ', operator);
-  }, [currentNum, accumulation, operator]);
+  // useEffect(() => {
+  //   console.log('currentNum: ', currentNum);
+  //   console.log('accumulation: ', accumulation);
+  //   console.log('operator: ', operator);
+  // }, [currentNum, accumulation, operator]);
 
   const onOperatorPress = (currentOperator) => {
     switch (currentOperator) {
@@ -96,6 +97,95 @@ export default function useKeyboard() {
     }
   };
 
+  const onInputChange = (value, caretStart) => {
+    const hasPoint = currentNum.includes('.');
+    const integer = currentNum.split('.').shift();
+
+    // handle number start with zero
+    if (value === '0' || value === '00') {
+      if (integer === '' || (integer === '0' && !hasPoint)) {
+        setCurrentNum('0');
+        return;
+      }
+    }
+
+    if (value === '.') {
+      if (hasPoint) return;
+      if (integer === '') {
+        setCurrentNum('0.');
+        return;
+      }
+      if (caretStart !== undefined) {
+        setCurrentNum((prev) => {
+          const strArr = prev.split('').filter((e) => e);
+          strArr.splice(caretStart - 1, 0, value);
+          return strArr.join('');
+        });
+      } else {
+        setCurrentNum((prev) => prev + value);
+      }
+      return;
+    }
+
+    if (isNumber(value)) {
+      if (integer === '0' && !hasPoint) {
+        setCurrentNum(value);
+        return;
+      }
+      if (caretStart !== undefined) {
+        setCurrentNum((prev) => {
+          const strArr = prev.split('').filter((e) => e);
+          strArr.splice(caretStart - 1, 0, value);
+          return strArr.join('');
+        });
+      } else {
+        setCurrentNum((prev) => prev + value);
+      }
+      return;
+    }
+
+    if (value === null) {
+      if (caretStart !== undefined) {
+        setCurrentNum((prev) => {
+          const strArr = prev.split('').filter((e) => e);
+          strArr.splice(caretStart, 1);
+          return strArr.join('');
+        });
+      }
+      return;
+    }
+
+    handleInputOperatorChange(value);
+  };
+
+  const onCurrentKeyChange = (e) => {
+    setCurrentKey(e);
+  };
+
+  useEffect(() => {
+    if (currentKey === 'Enter') {
+      onOperatorPress('=');
+    }
+  }, [currentKey]);
+
+  const handleInputOperatorChange = (value) => {
+    switch (value) {
+      case '+':
+      case '-':
+      case '=':
+        onOperatorPress(value);
+        break;
+      case '*':
+        onOperatorPress('x');
+        break;
+      case '/':
+        onOperatorPress('÷');
+        break;
+      default:
+        break;
+    }
+  };
+
   const calculate = () => {
     let total = '0';
     switch (operator) {
@@ -125,5 +215,7 @@ export default function useKeyboard() {
     onOperatorPress,
     onNumPress,
     onOtherPress,
+    onInputChange,
+    onCurrentKeyChange,
   };
 }
