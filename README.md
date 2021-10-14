@@ -10,7 +10,7 @@
 
 ## P1
 
-- [ ] 每三位數一個逗號
+- [x] 每三位數一個逗號
 - [ ] big.js
 - [ ] 數字超過 16 位處理
 - [ ] 匯率 api `https://api.exchangerate-api.com/v4/latest/${currencyOne}` https://github.com/windate3411/exchange-rate-calculator/blob/master/script.js
