@@ -97,7 +97,9 @@ export default function useKeyboard() {
     }
   };
 
-  const onInputChange = (value, caretStart) => {
+  const onInputChange = (e) => {
+    const value = e.nativeEvent.data;
+    const caretStart = e.target.selectionStart;
     const hasPoint = currentNum.includes('.');
     const integer = currentNum.split('.').shift();
 
@@ -159,7 +161,7 @@ export default function useKeyboard() {
   };
 
   const onCurrentKeyChange = (e) => {
-    setCurrentKey(e);
+    setCurrentKey(e.key);
   };
 
   useEffect(() => {
