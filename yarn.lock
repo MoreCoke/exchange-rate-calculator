@@ -4326,6 +4326,11 @@ cssstyle@^2.3.0:
   dependencies:
     cssom "~0.3.6"
 
+currencies.json@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/currencies.json/-/currencies.json-1.0.2.tgz#f76fedc7f4089bf95bed1bb71a77993e95787487"
+  integrity sha512-5a9gHuZTS+s228BCF/nTWt+UP5RIZMs9f9oEryFHHvqNd+1qrSVeLJfxmCRlHlfLm8YDGRXfRRtkwru5LBd3mg==
+
 cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"

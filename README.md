@@ -13,10 +13,10 @@
 - [x] 每三位數一個逗號
 - [ ] big.js
 - [ ] 數字超過 16 位處理
-- [ ] 匯率 api `https://api.exchangerate-api.com/v4/latest/${currencyOne}` https://github.com/windate3411/exchange-rate-calculator/blob/master/script.js
+- [x] 匯率 api `https://api.exchangerate-api.com/v4/latest/${currencyOne}` https://github.com/windate3411/exchange-rate-calculator/blob/master/script.js
       https://www.exchangerate-api.com/docs/standard-requests
-- [ ] 匯率互換按鈕
-- [ ] 匯率 json
+- [x] 匯率互換按鈕
+- [x] 匯率 json
 - [ ] 選擇國家跳彈窗和搜尋功能
 
 ## 要學習的技術

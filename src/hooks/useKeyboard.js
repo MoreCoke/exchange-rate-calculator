@@ -51,9 +51,7 @@ export default function useKeyboard() {
   const onOtherPress = (other) => {
     switch (other) {
       case 'AC':
-        setCurrentNum('');
-        setAccumulation('');
-        setOperator('');
+        resetKeyboard();
         break;
       case 'Swap':
         //TODO
@@ -64,6 +62,12 @@ export default function useKeyboard() {
       default:
         break;
     }
+  };
+
+  const resetKeyboard = () => {
+    setCurrentNum('');
+    setAccumulation('');
+    setOperator('');
   };
 
   const onNumPress = (num) => {
@@ -214,10 +218,12 @@ export default function useKeyboard() {
   return {
     currentNum,
     accumulation,
+    operator,
     onOperatorPress,
     onNumPress,
     onOtherPress,
     onInputChange,
     onCurrentKeyChange,
+    resetKeyboard,
   };
 }
