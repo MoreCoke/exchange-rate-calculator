@@ -19,10 +19,10 @@ function App() {
     operator,
     onOperatorPress,
     onNumPress,
-    onOtherPress,
     onInputChange,
     onCurrentKeyChange,
-    resetKeyboard,
+    reset,
+    onEnterPress,
   } = useKeyboard();
 
   const {
@@ -56,7 +56,10 @@ function App() {
 
   return (
     <div style={{ marginTop: 30, textAlign: 'center' }}>
-      <form style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <form
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        onSubmit={(e) => e.preventDefault()}
+      >
         <label
           htmlFor={'monitor'}
           style={{
@@ -96,7 +99,7 @@ function App() {
           onOtherPress={(other) => {
             switch (other) {
               case 'AC':
-                resetKeyboard();
+                reset();
                 break;
               case 'Swap':
                 handleRateSwap();
@@ -110,6 +113,7 @@ function App() {
           }}
           onNumPress={onNumPress}
           onOperatorPress={onOperatorPress}
+          onEnterPress={onEnterPress}
         />
       </div>
     </div>
