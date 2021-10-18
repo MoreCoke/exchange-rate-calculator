@@ -6,6 +6,7 @@ import Keyboard from './components/Keyboard';
 import useKeyboard from './hooks/useKeyboard';
 import Input from './components/Input';
 import useCurrency from './hooks/useCurrency';
+import Modal from './components/Modal';
 
 const currencyMap = new Map();
 currencies.forEach((el) => {
@@ -54,8 +55,18 @@ function App() {
     return operator;
   }, [operator]);
 
+  const [test, setTest] = useState(false);
+
   return (
     <div style={{ marginTop: 30, textAlign: 'center' }}>
+      <button onClick={() => setTest(!test)}> test</button>
+      <Modal
+        show={test}
+        list={currencies}
+        selectValue={sourceCurrency}
+        onSelect={setSourceCurrency}
+        onClose={() => setTest(false)}
+      />
       <form
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         onSubmit={(e) => e.preventDefault()}
