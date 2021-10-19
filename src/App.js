@@ -63,7 +63,7 @@ function App() {
       <Modal
         show={test}
         list={currencies}
-        selectValue={sourceCurrency}
+        selectedValue={sourceCurrency}
         onSelect={setSourceCurrency}
         onClose={() => setTest(false)}
       />
