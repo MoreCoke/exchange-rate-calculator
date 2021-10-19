@@ -1,13 +1,6 @@
-import React, { useRef, useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
-// 輸入搜尋功能
-// prop list
-// data search
-// data selectValue
-// onClick
-// _onClose
-// _onShow
-// _onChange
+import { StyledMask, StyledModal, StyledSearchInput, StyledList, StyledListItem } from './style';
 
 export default function Modal(props) {
   const [selectedValue, setSelectedValue] = useState(props.selectedValue);
@@ -44,50 +37,27 @@ export default function Modal(props) {
   return (
     <>
       {show && (
-        <>
-          <div
-            style={{
-              background: 'black',
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              opacity: 0.6,
-            }}
-            onClick={onClose}
-          ></div>
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              zIndex: 2,
-              margin: 'auto',
-              background: 'white',
-              width: 400,
-              height: 400,
-              overflow: 'auto',
-            }}
-          >
-            <input onChange={onChange} value={searchContent} />
-            <ul>
+        <div>
+          <StyledMask onClick={onClose} />
+          <StyledModal>
+            <StyledSearchInput
+              onChange={onChange}
+              value={searchContent}
+              placeholder={'Search currency'}
+            />
+            <StyledList>
               {list.map((el) => (
-                <li
+                <StyledListItem
                   key={el.code}
                   onClick={() => onListItemClick(el)}
-                  style={{
-                    background: el.code === selectedValue && 'red',
-                  }}
+                  $selected={el.code === selectedValue}
                 >
                   {el.code}
-                </li>
+                </StyledListItem>
               ))}
-            </ul>
-          </div>
-        </>
+            </StyledList>
+          </StyledModal>
+        </div>
       )}
     </>
   );
