@@ -12,20 +12,6 @@ const operators = [
 
 const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '00', '.'];
 
-const others = ['AC', 'Swap', 'Currency'];
-
-function OtherButtons({ onOtherPress }) {
-  return (
-    <div>
-      {others.map((el) => (
-        <SecondaryButton key={el} value={el} onClick={onOtherPress}>
-          {el}
-        </SecondaryButton>
-      ))}
-    </div>
-  );
-}
-
 function NumButtons({ onNumPress }) {
   return (
     <div>
@@ -60,11 +46,22 @@ function EnterButton({ onEnterPress }) {
   );
 }
 
-export default function Keyboard({ onOtherPress, onNumPress, onOperatorPress, onEnterPress }) {
+export default function Keyboard({
+  onClearPress,
+  onSwapPress,
+  onDelPress,
+  onNumPress,
+  onOperatorPress,
+  onEnterPress,
+}) {
   return (
     <StyledKeyboard>
       <StyledLeftButtonGroup>
-        <OtherButtons onOtherPress={onOtherPress} />
+        <div>
+          <SecondaryButton onClick={onClearPress}>AC</SecondaryButton>
+          <SecondaryButton onClick={onDelPress}>←</SecondaryButton>
+          <SecondaryButton onClick={onSwapPress}>Swap</SecondaryButton>
+        </div>
         <NumButtons onNumPress={onNumPress} />
       </StyledLeftButtonGroup>
       <StyledRightButtonGroup>

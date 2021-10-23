@@ -24,6 +24,7 @@ function App() {
     onCurrentKeyChange,
     reset,
     onEnterPress,
+    delLastStr,
   } = useKeyboard();
 
   const {
@@ -107,21 +108,9 @@ function App() {
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Keyboard
-          onOtherPress={(other) => {
-            switch (other) {
-              case 'AC':
-                reset();
-                break;
-              case 'Swap':
-                handleRateSwap();
-                break;
-              case 'Currency':
-                // TODO;
-                break;
-              default:
-                break;
-            }
-          }}
+          onSwapPress={handleRateSwap}
+          onClearPress={reset}
+          onDelPress={delLastStr}
           onNumPress={onNumPress}
           onOperatorPress={onOperatorPress}
           onEnterPress={onEnterPress}

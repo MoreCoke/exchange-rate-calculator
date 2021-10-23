@@ -41,6 +41,11 @@ export default function useKeyboard() {
     setOperator('');
   };
 
+  const delLastStr = () => {
+    const newNum = currentNum.substring(0, currentNum.length - 1);
+    setCurrentNum(newNum);
+  };
+
   const onNumPress = (num) => {
     const hasPoint = currentNum.includes('.');
     const integer = currentNum.split('.').shift();
@@ -101,5 +106,6 @@ export default function useKeyboard() {
     onCurrentKeyChange,
     reset,
     onEnterPress,
+    delLastStr,
   };
 }
