@@ -47,6 +47,7 @@ export default function useKeyboard() {
   };
 
   const onNumPress = (num) => {
+    if (currentNum.length > 15) return;
     const hasPoint = currentNum.includes('.');
     const integer = currentNum.split('.').shift();
 
@@ -78,6 +79,7 @@ export default function useKeyboard() {
   };
 
   const onInputChange = (e) => {
+    if (currentNum.length > 15) return;
     const value = e.nativeEvent.data;
     if (isOperator(value)) {
       onOperatorPress(value);
