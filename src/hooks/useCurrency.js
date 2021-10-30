@@ -6,6 +6,7 @@ export default function useCurrency(currency = 'TWD') {
 
   const [sourceFXRate, setSourceFXRate] = useState(0);
   const [targetFXRate, setTargetFXRate] = useState(0);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +16,7 @@ export default function useCurrency(currency = 'TWD') {
         const response = await res.json();
         const { [sourceCurrency]: source, [targetCurrency]: target } = response.rates;
 
+        setData(response.rates);
         setSourceFXRate(source);
         setTargetFXRate(target);
       } catch (err) {
@@ -33,12 +35,17 @@ export default function useCurrency(currency = 'TWD') {
     setTargetCurrency(target);
   };
 
+  const handleTargetValue = (currency) => {
+    setTargetCurrency(currency);
+    setTargetFXRate(data[currency]);
+  };
   return {
     sourceCurrency,
     targetCurrency,
     sourceFXRate,
     targetFXRate,
     setSourceCurrency,
+    handleTargetValue,
     handleRateSwap,
   };
 }

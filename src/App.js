@@ -33,6 +33,7 @@ function App() {
     sourceFXRate,
     targetFXRate,
     setSourceCurrency,
+    handleTargetValue,
     handleRateSwap,
   } = useCurrency('TWD');
 
@@ -56,17 +57,24 @@ function App() {
     return operator;
   }, [operator]);
 
-  const [test, setTest] = useState(false);
+  const [sourceModal, setSourceModal] = useState(false);
+  const [targetModal, setTargetModal] = useState(false);
 
   return (
     <div style={{ marginTop: 30, textAlign: 'center' }}>
-      <button onClick={() => setTest(!test)}> test</button>
       <Modal
-        show={test}
+        show={sourceModal}
         list={currencies}
         selectedValue={sourceCurrency}
         onSelect={setSourceCurrency}
-        onClose={() => setTest(false)}
+        onClose={() => setSourceModal(false)}
+      />
+      <Modal
+        show={targetModal}
+        list={currencies}
+        selectedValue={targetCurrency}
+        onSelect={handleTargetValue}
+        onClose={() => setTargetModal(false)}
       />
       <form
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -80,6 +88,7 @@ function App() {
             fontSize: '1em',
             fontWeight: 'bold',
           }}
+          onClick={() => setSourceModal(!sourceModal)}
         >
           {sourceCurrency} {sourceValue} {operatorValue}
         </label>
@@ -90,7 +99,10 @@ function App() {
           onKeyDown={onCurrentKeyChange}
         />
       </form>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        onClick={() => setTargetModal(!targetModal)}
+      >
         <div style={{ flexBasis: 80, height: 40, fontSize: '1em', fontWeight: 'bold' }}>
           {targetCurrency} {targetAccumulation}
         </div>
