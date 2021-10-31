@@ -1,8 +1,7 @@
 import React, { useRef, useMemo, useState } from 'react';
-import numeral from 'numeral';
 
 import { StyledInput } from './style';
-import { isNumber, isAlphabet, isValidNumber } from '../../utils';
+import { isNumber, isAlphabet, isValidNumber, numberWithCommas } from '../../utils';
 
 export default function Input(props) {
   const [oldValue, setOldValue] = useState('');
@@ -11,7 +10,7 @@ export default function Input(props) {
 
   const inputValue = useMemo(() => {
     if (props.value === '') return '';
-    return focus ? props.value : numeral(props.value).format('0,0');
+    return focus ? props.value : numberWithCommas(props.value);
   }, [props.value, focus]);
 
   const onKeyDown = (e) => {

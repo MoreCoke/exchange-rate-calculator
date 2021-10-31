@@ -16,15 +16,15 @@
 - [x] 匯率互換按鈕
 - [x] 匯率 json
 - [x] 彈窗 component 功能
-- [ ] 彈窗 component style
+- [x] 彈窗 component style
 - [x] 選擇國家，評估使用 select 還是 input list 還是 select
 - [x] 國家搜尋功能
 
 ## P2
 
-- [ ] numeral (0,0) 小數點顯示問題，register 一個 format， [解法](https://stackoverflow.com/questions/63503163/custom-format-in-numeral-js-negative-number-20-to-be-20)
+- [x] numeral (0,0) 小數點顯示問題，register 一個 format， [解法](https://stackoverflow.com/questions/63503163/custom-format-in-numeral-js-negative-number-20-to-be-20)
 - [ ] big.js
-- [ ] 數字超過 16 位處理
+- [x] 數字超過 16 位處理
 - [ ] 數字顯示國家幣別
 
 ## 要學習的技術
