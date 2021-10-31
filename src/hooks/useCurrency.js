@@ -27,7 +27,7 @@ export default function useCurrency(currency = 'TWD') {
     fetchData();
   }, [sourceCurrency]);
 
-  const handleRateSwap = () => {
+  const swapCurrency = () => {
     const source = targetCurrency;
     const target = sourceCurrency;
 
@@ -35,7 +35,11 @@ export default function useCurrency(currency = 'TWD') {
     setTargetCurrency(target);
   };
 
-  const handleTargetValue = (currency) => {
+  const updateSourceCurrency = (currency) => {
+    setSourceCurrency(currency);
+  };
+
+  const updateTargetCurrency = (currency) => {
     setTargetCurrency(currency);
     setTargetFXRate(data[currency]);
   };
@@ -44,8 +48,8 @@ export default function useCurrency(currency = 'TWD') {
     targetCurrency,
     sourceFXRate,
     targetFXRate,
-    setSourceCurrency,
-    handleTargetValue,
-    handleRateSwap,
+    updateSourceCurrency,
+    updateTargetCurrency,
+    swapCurrency,
   };
 }

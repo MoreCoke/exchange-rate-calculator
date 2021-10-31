@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import { isNumber, isOperator, calculate } from '../utils';
+import { isNumber, isOperator, calculate as calc } from '../utils';
 
-export default function useKeyboard() {
+export default function useCalculator() {
   const [currentNum, setCurrentNum] = useState('');
   const [accumulation, setAccumulation] = useState('');
   const [operator, setOperator] = useState('');
-  const [currentKey, setCurrentKey] = useState('');
 
-  const onOperatorPress = (currentOperator) => {
+  const calculate = (currentOperator) => {
     if (accumulation && currentNum && operator) {
-      const total = calculate(accumulation, currentNum, operator);
+      const total = calc(accumulation, currentNum, operator);
       setOperator(currentOperator);
       setCurrentNum('');
       setAccumulation(total);
@@ -25,9 +24,9 @@ export default function useKeyboard() {
     setOperator(currentOperator);
   };
 
-  const onEnterPress = () => {
+  const enter = () => {
     if (accumulation && currentNum && operator) {
-      const total = calculate(accumulation, currentNum, operator);
+      const total = calc(accumulation, currentNum, operator);
       setOperator('');
       setCurrentNum('');
       setAccumulation(total);
@@ -41,12 +40,12 @@ export default function useKeyboard() {
     setOperator('');
   };
 
-  const delLastStr = () => {
+  const removeLastChar = () => {
     const newNum = currentNum.substring(0, currentNum.length - 1);
     setCurrentNum(newNum);
   };
 
-  const onNumPress = (num) => {
+  const updateNumber = (num) => {
     if (currentNum.length > 15) return;
     const hasPoint = currentNum.includes('.');
     const integer = currentNum.split('.').shift();
@@ -82,32 +81,28 @@ export default function useKeyboard() {
     if (currentNum.length > 15) return;
     const value = e.nativeEvent.data;
     if (isOperator(value)) {
-      onOperatorPress(value);
+      calculate(value);
       return;
     }
     setCurrentNum(e.target.value);
   };
 
-  const onCurrentKeyChange = (e) => {
-    setCurrentKey(e.key);
-  };
-
-  useEffect(() => {
-    if (currentKey === 'Enter') {
-      onEnterPress();
+  const onInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      enter();
     }
-  }, [currentKey]);
+  };
 
   return {
     currentNum,
     accumulation,
     operator,
-    onOperatorPress,
-    onNumPress,
+    calculate,
+    updateNumber,
     onInputChange,
-    onCurrentKeyChange,
+    onInputKeyDown,
     reset,
-    onEnterPress,
-    delLastStr,
+    enter,
+    removeLastChar,
   };
 }
