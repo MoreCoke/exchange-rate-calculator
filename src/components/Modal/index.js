@@ -12,7 +12,7 @@ export default function Modal(props) {
     return props.list.filter((e) => {
       return e.code.toLowerCase().includes(searchContent.toLowerCase());
     });
-  }, [searchContent]);
+  }, [props.list, searchContent]);
 
   const onClose = () => {
     props.onClose?.();

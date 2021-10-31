@@ -20,7 +20,6 @@ function App() {
   const {
     currentNum,
     accumulation,
-    operator,
     calculate,
     updateNumber,
     onInputChange,
@@ -47,7 +46,7 @@ function App() {
   const targetAccumulation = useMemo(() => {
     if (accumulation === '') return '';
     return numeral(accumulation).multiply(targetFXRate).format('0.0');
-  }, [targetCurrency, targetFXRate, accumulation]);
+  }, [targetFXRate, accumulation]);
 
   const targetValue = useMemo(() => {
     if (currentNum === '') return '';

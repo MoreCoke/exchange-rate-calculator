@@ -14,11 +14,11 @@ export default function useCurrency(currency = 'TWD') {
         const url = `https://api.exchangerate-api.com/v4/latest/${sourceCurrency}`;
         const res = await fetch(url);
         const response = await res.json();
-        const { [sourceCurrency]: source, [targetCurrency]: target } = response.rates;
+        const { [sourceCurrency]: sourceRate, [targetCurrency]: targetRate } = response.rates;
 
         setData(response.rates);
-        setSourceFXRate(source);
-        setTargetFXRate(target);
+        setSourceFXRate(sourceRate);
+        setTargetFXRate(targetRate);
       } catch (err) {
         console.log('error: ', err);
       }
